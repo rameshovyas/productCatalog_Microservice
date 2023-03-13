@@ -5,7 +5,7 @@ namespace MyProject.Catalog.Service.Controllers
 {
     [ApiController]
     [Route("items")]
-    class ItemsController : ControllerBase
+    public class ItemsController : ControllerBase
     {
         //Defining List for data transfer
         private static readonly List<ItemDto> items = new()
@@ -15,6 +15,20 @@ namespace MyProject.Catalog.Service.Controllers
             new ItemDto(Guid.NewGuid(),"Wooden Comb", "Handmade wooden purse", 1500, DateTimeOffset.UtcNow),
         };
 
-        
+        [HttpGet]
+        public IEnumerable<ItemDto> Get()
+        {
+            return items;
+        }
+
+        //GET /items/{id}
+        [HttpGet("{id}")]
+        public ItemDto GetById(Guid id)
+        {
+            var item = items.Where(item => item.Id == id).SingleOrDefault();
+            return item;
+        }
+
+
     }
 }
