@@ -29,6 +29,13 @@ namespace MyProject.Catalog.Service.Controllers
             return item;
         }
 
+        [HttpPost]
+        public ActionResult<ItemDto> post(CreateItemDto createItemDto)
+        {
+            var item = new ItemDto(Guid.NewGuid(), createItemDto.Name, createItemDto.Description, createItemDto.Price, DateTimeOffset.UtcNow);
+            items.Add(item);
 
+            return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
+        }
     }
 }
