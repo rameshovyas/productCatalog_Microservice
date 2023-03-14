@@ -47,18 +47,25 @@ namespace MyProject.Catalog.Service.Controllers
         {
             //Find the existing item first
             var existingItem = items.Where(item => item.Id == id).SingleOrDefault();
-            var updatedItem = existingItem with
+            if (existingItem == null)
             {
-                Name = updateItemDto.Name,
-                Description = updateItemDto.Description,
-                Price = updateItemDto.Price
-            };
+                return NotFound();
+            }
+            else
+            {
+                var updatedItem = existingItem with
+                {
+                    Name = updateItemDto.Name,
+                    Description = updateItemDto.Description,
+                    Price = updateItemDto.Price
+                };
 
-            //Find the existing item index
-            var index = items.FindIndex(existingItem => existingItem.Id == id);
-            items[index] = updatedItem;
+                //Find the existing item index
+                var index = items.FindIndex(existingItem => existingItem.Id == id);
+                items[index] = updatedItem;
 
-            return NoContent();
+                return NoContent();
+            }
         }
 
         // DELETE /items/{id}
