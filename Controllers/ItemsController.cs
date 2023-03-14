@@ -73,6 +73,10 @@ namespace MyProject.Catalog.Service.Controllers
         public IActionResult Delete(Guid id)
         {
             var index = items.FindIndex(existingItem => existingItem.Id == id);
+            if (index < 0)
+            {
+                return NotFound();
+            }
             items.RemoveAt(index);
             return NoContent();
         }
