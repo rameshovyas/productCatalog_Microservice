@@ -23,9 +23,13 @@ namespace MyProject.Catalog.Service.Controllers
 
         //GET /items/{id}
         [HttpGet("{id}")]
-        public ItemDto GetById(Guid id)
+        public ActionResult<ItemDto> GetById(Guid id)
         {
             var item = items.Where(item => item.Id == id).SingleOrDefault();
+            if (item == null)
+            {
+                return NotFound();
+            }
             return item;
         }
 
