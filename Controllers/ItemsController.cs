@@ -30,12 +30,31 @@ namespace MyProject.Catalog.Service.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ItemDto> post(CreateItemDto createItemDto)
+        public ActionResult<ItemDto> Post(CreateItemDto createItemDto)
         {
             var item = new ItemDto(Guid.NewGuid(), createItemDto.Name, createItemDto.Description, createItemDto.Price, DateTimeOffset.UtcNow);
             items.Add(item);
 
             return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, UpdateItemDto updateItemDto)
+        {
+            //Find the existing item first
+            var existingItem = items.Where(item => item.Id == id).SingleOrDefault();
+            var updatedItem = existingItem with
+            {
+                Name = updateItemDto.Name,
+                Description = updateItemDto.Description,
+                Price = updateItemDto.Price
+            };
+
+            //Find the existing item index
+            var index = items.FindIndex(existingItem => existingItem.Id == id);
+            items[index] = updatedItem;
+
+            return NoContent();
         }
     }
 }
