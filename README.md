@@ -42,3 +42,6 @@ Not Found Check
 
 Validation of DTO model at server side
 ![App Screenshot](/screenshots/w8.png)
+
+MongoDb Explorer with actual data
+![App Screenshot](/screenshots/w9.png)
