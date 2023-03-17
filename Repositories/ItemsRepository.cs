@@ -3,7 +3,8 @@ using MyProject.Catalog.Entities;
 
 namespace MyProject.Catalog.Service.Repositories
 {
-    public class ItemsRepository
+
+    public class ItemsRepository : IItemsRepository
     {
         private const string collectionName = "items"; // mongoDB collection name
         private readonly IMongoCollection<Item> dbCollection;

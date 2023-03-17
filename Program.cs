@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
+using MyProject.Catalog.Service.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String)); // Make mongo db Guid stored as string
 BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String)); // Make mongo db DateTime stored as string
 
-
+builder.Services.AddScoped<IItemsRepository, ItemsRepository>(); //Dependency Injection
 builder.Services.AddControllers(options =>
 {
     options.SuppressAsyncSuffixInActionNames = false;
