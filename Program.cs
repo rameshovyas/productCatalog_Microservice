@@ -2,12 +2,21 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MyProject.Catalog.Service.Repositories;
+using MyProject.Catalog.Service.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String)); // Make mongo db Guid stored as string
 BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String)); // Make mongo db DateTime stored as string
+
+//Getting Settings values 
+var serviceSettings = new ServiceSettings();
+var mongoDbSettings = new MongoDbSettings();
+
+/*builder.Services.Configure<ServiceSettings>(builder.Configuration.GetSection("ServiceSettings"));
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDbSettings"));
+*/
 
 builder.Services.AddScoped<IItemsRepository, ItemsRepository>(); //Dependency Injection
 builder.Services.AddControllers(options =>

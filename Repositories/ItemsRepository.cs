@@ -14,6 +14,7 @@ namespace MyProject.Catalog.Service.Repositories
         {
             var mongoClient = new MongoClient("mongodb://localhost:27017"); // mongo db connection
             var database = mongoClient.GetDatabase("Catalog"); // database name
+
             dbCollection = database.GetCollection<Item>(collectionName); // database collection (tables)
 
         }
