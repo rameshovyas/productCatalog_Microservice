@@ -1,7 +1,7 @@
 
 # Product Catalog Microservice in DotNet Core (DotNet 7)
 
-A complete .net microservice for managing product catalog. It can be used to Create, Update, Query and Delete items from catalog. Validations of DTO with data annotaions are also specified so no bad request can pass.
+A complete .net microservice for managing product / item catalog. It can be used to Create, Update, Query and Delete items from catalog. Validations of DTO with data annotaions are also specified so no bad request can pass.
 This microservice used mongodb as database.
 
 
