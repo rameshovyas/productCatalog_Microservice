@@ -12,6 +12,7 @@ This microservice used mongodb as database.
 - Clean Architecture
 - MongoDB
 - CRUD Operations
+- Dpendency Injection
 
 
 
